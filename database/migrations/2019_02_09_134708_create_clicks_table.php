@@ -16,7 +16,7 @@ class CreateClicksTable extends Migration
         Schema::create('clicks', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('request_id');
-            $table->string('banner_name', 30);
+            $table->string('banner_name', 30)->unique();
             $table->decimal('click_cost', 10, 2);
             $table->timestamps();
 

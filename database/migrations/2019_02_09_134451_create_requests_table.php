@@ -17,8 +17,8 @@ class CreateRequestsTable extends Migration
             $table->increments('id');
             $table->unsignedInteger('ad_id');
             $table->unsignedInteger('country_id');
-            $table->string('user_key', 7);
-            $table->string('unique_key', 70);
+            $table->string('user_key', 7)->unique();
+            $table->string('unique_key', 70)->unique();
             $table->timestamps();
 
             $table->foreign('ad_id')->references('id')->on('ads')->onDelete('cascade');
