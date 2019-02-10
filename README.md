@@ -13,7 +13,7 @@ List of all clicks: `/click/index`
 
 Click single view: `/click/view?id={id}`
 
-Create new click: `/click/creat`
+Create new click: `/click/create`
 
 Edit click: `/click/edit/{id}`
 
