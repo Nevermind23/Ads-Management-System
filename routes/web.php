@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('report/ads/{days}', 'AdsController@adsReport');
 Route::get('report/countries', 'AdsController@countriesReport');
 
-Route::get('/click/index', 'ClickController@index');
-Route::get('/click/view/{id}', 'ClickController@show')->name('click.show');
+Route::get('/click/index', 'ClickController@index')->name('click.index');
+Route::get('/click/view', 'ClickController@show')->name('click.show');
 
-Route::get('/click/create', 'ClickController@create');
-Route::post('/click/create', 'ClickController@store');
-Route::get('/click/edit/{id}', 'ClickController@edit');
-Route::post('/click/edit/{id}', 'ClickController@update');
-Route::get('/click/delete/{id}', 'ClickController@destroy');
+Route::get('/click/create', 'ClickController@create')->name('click.create');
+Route::post('/click/create', 'ClickController@store')->name('click.store');
+Route::get('/click/edit/{id}', 'ClickController@edit')->name('click.edit');
+Route::post('/click/edit/{id}', 'ClickController@update')->name('click.update');
+Route::get('/click/delete/{id}', 'ClickController@destroy')->name('click.delete');

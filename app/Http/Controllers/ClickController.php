@@ -40,23 +40,27 @@ class ClickController extends Controller
     {
         $data = $request->validate([
             'request_id' => 'required|numeric|exists:requests,id',
-            'banner_name' => 'required|string|max:30|unique',
+            'banner_name' => 'required|string|max:30|unique:clicks',
             'click_cost' => 'required|numeric'
         ]);
-        $click = DB::table('clicks')->insertGetId($data);
+        $data['created_at'] = now();
+        $data['updated_at'] = now();
+        $clickId = DB::table('clicks')->insertGetId($data);
 
-        return redirect(route('click.show', $click));
+        return redirect(route('click.show', ['id' => $clickId]));
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param Request $request
      * @return \Illuminate\Database\Eloquent\Model|\Illuminate\Database\Query\Builder|object
      */
-    public function show($id)
+    public function show(Request $request)
     {
+        $id = $request->id;
         $click = DB::table('clicks')->where('id', $id)->first();
+        abort_if(empty($id) || empty($click), 404);
         return view('click.show', compact('click'));
     }
 
@@ -85,10 +89,10 @@ class ClickController extends Controller
         $clickData = $click->first();
         $data = $request->validate([
             'request_id' => 'required|numeric|exists:requests,id',
-            'banner_name' => 'required|string|max:30|unique:clicks,banner_name.'.$clickData->id,
+            'banner_name' => 'required|string|max:30|unique:clicks,banner_name,'.$clickData->id,
             'click_cost' => 'required|numeric'
         ]);
-
+        $data['updated_at'] = now();
         $click->update($data);
 
         return back()->with(['success' => 'Click info has been updated']);
