@@ -18,7 +18,7 @@
                         @if(request()->route()->getName() != 'click.index')
                             <p class="control">
                                 <a href="javascript:void(0);" class="button is-normal" onclick="GoBack()">
-                                    <i class="fas fa-chevron-left"></i> &nbsp; Bo Back
+                                    <i class="fas fa-chevron-left"></i> &nbsp; Go Back
                                 </a>
                             </p>
                         @endif
